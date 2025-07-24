@@ -42,7 +42,7 @@ body {
 }
 
 .cache-info {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
+    background: #3a3f47;
     color: white;
     padding: 15px;
     border-radius: 10px;
@@ -51,6 +51,7 @@ body {
     font-weight: 500;
     display: none;
     animation: slideDown 0.5s ease;
+    border: 2px dotted #457c70;
 }
 
 .input-section {
