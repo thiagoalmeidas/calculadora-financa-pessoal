@@ -15,7 +15,7 @@
         
         <div class="content">
             <div class="cache-info" id="cache-info">
-                💾 Os Dados são salvo no cache do seu navegador, não coletamos nenhuma informação.
+                💾 Dados salvos automaticamente! Seus valores ficam guardados até você limpar os campos.
             </div>
             
             <div class="input-section">
@@ -41,9 +41,14 @@
                     <div class="input-row">
                         <div class="input-group">
                             <label for="moradia-valor">Valor gasto (R$):</label>
-                            <input type="number" id="moradia-valor" placeholder="R$ 0,00" min="0" step="0.01">
+                            <input type="number" id="moradia-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
                         </div>
                         <div class="percentage-display" id="moradia-percent">0%</div>
+                        <button class="expand-btn" onclick="toggleSubcategories('moradia')" title="Adicionar detalhes">+</button>
+                    </div>
+                    <div class="subcategories" id="moradia-subcategories">
+                        <div class="subcategory-total">Total: R$ 0,00</div>
+                        <button class="add-subcategory" onclick="addSubcategory('moradia')">+ Adicionar item</button>
                     </div>
                 </div>
                 
@@ -58,9 +63,14 @@
                     <div class="input-row">
                         <div class="input-group">
                             <label for="alimentacao-valor">Valor gasto (R$):</label>
-                            <input type="number" id="alimentacao-valor" placeholder="R$ 0,00" min="0" step="0.01">
+                            <input type="number" id="alimentacao-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
                         </div>
                         <div class="percentage-display" id="alimentacao-percent">0%</div>
+                        <button class="expand-btn" onclick="toggleSubcategories('alimentacao')" title="Adicionar detalhes">+</button>
+                    </div>
+                    <div class="subcategories" id="alimentacao-subcategories">
+                        <div class="subcategory-total">Total: R$ 0,00</div>
+                        <button class="add-subcategory" onclick="addSubcategory('alimentacao')">+ Adicionar item</button>
                     </div>
                 </div>
                 
@@ -75,9 +85,14 @@
                     <div class="input-row">
                         <div class="input-group">
                             <label for="transporte-valor">Valor gasto (R$):</label>
-                            <input type="number" id="transporte-valor" placeholder="R$ 0,00" min="0" step="0.01">
+                            <input type="number" id="transporte-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
                         </div>
                         <div class="percentage-display" id="transporte-percent">0%</div>
+                        <button class="expand-btn" onclick="toggleSubcategories('transporte')" title="Adicionar detalhes">+</button>
+                    </div>
+                    <div class="subcategories" id="transporte-subcategories">
+                        <div class="subcategory-total">Total: R$ 0,00</div>
+                        <button class="add-subcategory" onclick="addSubcategory('transporte')">+ Adicionar item</button>
                     </div>
                 </div>
                 
@@ -92,9 +107,14 @@
                     <div class="input-row">
                         <div class="input-group">
                             <label for="gastos-valor">Valor gasto (R$):</label>
-                            <input type="number" id="gastos-valor" placeholder="R$ 0,00" min="0" step="0.01">
+                            <input type="number" id="gastos-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
                         </div>
                         <div class="percentage-display" id="gastos-percent">0%</div>
+                        <button class="expand-btn" onclick="toggleSubcategories('gastos')" title="Adicionar detalhes">+</button>
+                    </div>
+                    <div class="subcategories" id="gastos-subcategories">
+                        <div class="subcategory-total">Total: R$ 0,00</div>
+                        <button class="add-subcategory" onclick="addSubcategory('gastos')">+ Adicionar item</button>
                     </div>
                 </div>
                 
@@ -109,9 +129,14 @@
                     <div class="input-row">
                         <div class="input-group">
                             <label for="investimentos-valor">Valor investido (R$):</label>
-                            <input type="number" id="investimentos-valor" placeholder="R$ 0,00" min="0" step="0.01">
+                            <input type="number" id="investimentos-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
                         </div>
                         <div class="percentage-display" id="investimentos-percent">0%</div>
+                        <button class="expand-btn" onclick="toggleSubcategories('investimentos')" title="Adicionar detalhes">+</button>
+                    </div>
+                    <div class="subcategories" id="investimentos-subcategories">
+                        <div class="subcategory-total">Total: R$ 0,00</div>
+                        <button class="add-subcategory" onclick="addSubcategory('investimentos')">+ Adicionar item</button>
                     </div>
                 </div>
                 
@@ -126,9 +151,14 @@
                     <div class="input-row">
                         <div class="input-group">
                             <label for="poupanca-valor">Valor poupado (R$):</label>
-                            <input type="number" id="poupanca-valor" placeholder="R$ 0,00" min="0" step="0.01">
+                            <input type="number" id="poupanca-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
                         </div>
                         <div class="percentage-display" id="poupanca-percent">0%</div>
+                        <button class="expand-btn" onclick="toggleSubcategories('poupanca')" title="Adicionar detalhes">+</button>
+                    </div>
+                    <div class="subcategories" id="poupanca-subcategories">
+                        <div class="subcategory-total">Total: R$ 0,00</div>
+                        <button class="add-subcategory" onclick="addSubcategory('poupanca')">+ Adicionar item</button>
                     </div>
                 </div>
                 
@@ -143,9 +173,14 @@
                     <div class="input-row">
                         <div class="input-group">
                             <label for="lazer-valor">Valor gasto (R$):</label>
-                            <input type="number" id="lazer-valor" placeholder="R$ 0,00" min="0" step="0.01">
+                            <input type="number" id="lazer-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
                         </div>
                         <div class="percentage-display" id="lazer-percent">0%</div>
+                        <button class="expand-btn" onclick="toggleSubcategories('lazer')" title="Adicionar detalhes">+</button>
+                    </div>
+                    <div class="subcategories" id="lazer-subcategories">
+                        <div class="subcategory-total">Total: R$ 0,00</div>
+                        <button class="add-subcategory" onclick="addSubcategory('lazer')">+ Adicionar item</button>
                     </div>
                 </div>
                 
@@ -160,9 +195,14 @@
                     <div class="input-row">
                         <div class="input-group">
                             <label for="doacoes-valor">Valor doado (R$):</label>
-                            <input type="number" id="doacoes-valor" placeholder="R$ 0,00" min="0" step="0.01">
+                            <input type="number" id="doacoes-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
                         </div>
                         <div class="percentage-display" id="doacoes-percent">0%</div>
+                        <button class="expand-btn" onclick="toggleSubcategories('doacoes')" title="Adicionar detalhes">+</button>
+                    </div>
+                    <div class="subcategories" id="doacoes-subcategories">
+                        <div class="subcategory-total">Total: R$ 0,00</div>
+                        <button class="add-subcategory" onclick="addSubcategory('doacoes')">+ Adicionar item</button>
                     </div>
                 </div>
             </div>
@@ -253,6 +293,89 @@
         // Chave para salvar no localStorage
         const STORAGE_KEY = 'controle-financeiro-dados-v2';
         
+        // Armazenar subcategorias
+        let subcategorias = {
+            moradia: [],
+            alimentacao: [],
+            transporte: [],
+            gastos: [],
+            investimentos: [],
+            poupanca: [],
+            lazer: [],
+            doacoes: []
+        };
+        
+        // Função para alternar visibilidade das subcategorias
+        function toggleSubcategories(categoria) {
+            const subcategoriesDiv = document.getElementById(`${categoria}-subcategories`);
+            const expandBtn = subcategoriesDiv.previousElementSibling.querySelector('.expand-btn');
+            
+            if (subcategoriesDiv.classList.contains('expanded')) {
+                subcategoriesDiv.classList.remove('expanded');
+                expandBtn.classList.remove('expanded');
+                expandBtn.textContent = '+';
+            } else {
+                subcategoriesDiv.classList.add('expanded');
+                expandBtn.classList.add('expanded');
+                expandBtn.textContent = '+';
+            }
+        }
+        
+        // Função para adicionar nova subcategoria
+        function addSubcategory(categoria) {
+            const subcategoriesDiv = document.getElementById(`${categoria}-subcategories`);
+            const itemsContainer = subcategoriesDiv.querySelector('.add-subcategory');
+            
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'subcategory-item';
+            itemDiv.innerHTML = `
+                <input type="text" placeholder="Descrição (ex: Aluguel)" class="subcategory-name">
+                <input type="number" placeholder="R$ 0,00" min="0" step="0.01" class="subcategory-value">
+                <button class="remove-subcategory" onclick="removeSubcategory(this, '${categoria}')" title="Remover item">×</button>
+            `;
+            
+            // Inserir antes do botão "Adicionar item"
+            subcategoriesDiv.insertBefore(itemDiv, itemsContainer);
+            
+            // Adicionar eventos para atualização automática
+            const valueInput = itemDiv.querySelector('.subcategory-value');
+            const nameInput = itemDiv.querySelector('.subcategory-name');
+            
+            valueInput.addEventListener('input', () => updateCategoryTotal(categoria));
+            nameInput.addEventListener('input', () => salvarDados());
+            
+            // Focar no campo de descrição
+            nameInput.focus();
+        }
+        
+        // Função para remover subcategoria
+        function removeSubcategory(button, categoria) {
+            button.parentElement.remove();
+            updateCategoryTotal(categoria);
+        }
+        
+        // Função para atualizar o total de uma categoria
+        function updateCategoryTotal(categoria) {
+            const subcategoriesDiv = document.getElementById(`${categoria}-subcategories`);
+            const items = subcategoriesDiv.querySelectorAll('.subcategory-item');
+            let total = 0;
+            
+            items.forEach(item => {
+                const value = parseFloat(item.querySelector('.subcategory-value').value) || 0;
+                total += value;
+            });
+            
+            // Atualizar o campo principal da categoria
+            inputs[categoria].value = total.toFixed(2);
+            
+            // Atualizar o display do total na subcategoria
+            const totalDisplay = subcategoriesDiv.querySelector('.subcategory-total');
+            totalDisplay.textContent = `Total: ${formatarMoeda(total)}`;
+            
+            // Recalcular orçamento
+            calcularOrcamento();
+        }
+        
         // Função para salvar dados no localStorage
         function salvarDados() {
             const dados = {
@@ -265,8 +388,24 @@
                 poupanca: inputs.poupanca.value,
                 lazer: inputs.lazer.value,
                 doacoes: inputs.doacoes.value,
+                subcategorias: {},
                 timestamp: new Date().getTime()
             };
+            
+            // Salvar subcategorias
+            for (const categoria in subcategorias) {
+                const subcategoriesDiv = document.getElementById(`${categoria}-subcategories`);
+                const items = subcategoriesDiv.querySelectorAll('.subcategory-item');
+                dados.subcategorias[categoria] = [];
+                
+                items.forEach(item => {
+                    const name = item.querySelector('.subcategory-name').value;
+                    const value = item.querySelector('.subcategory-value').value;
+                    if (name || value) {
+                        dados.subcategorias[categoria].push({ name, value });
+                    }
+                });
+            }
             
             localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
             
@@ -297,6 +436,21 @@
                         inputs.poupanca.value = dados.poupanca || '';
                         inputs.lazer.value = dados.lazer || '';
                         inputs.doacoes.value = dados.doacoes || '';
+                        
+                        // Carregar subcategorias
+                        if (dados.subcategorias) {
+                            for (const categoria in dados.subcategorias) {
+                                const items = dados.subcategorias[categoria];
+                                items.forEach(item => {
+                                    addSubcategory(categoria);
+                                    const subcategoriesDiv = document.getElementById(`${categoria}-subcategories`);
+                                    const lastItem = subcategoriesDiv.querySelector('.subcategory-item:last-of-type');
+                                    lastItem.querySelector('.subcategory-name').value = item.name;
+                                    lastItem.querySelector('.subcategory-value').value = item.value;
+                                });
+                                updateCategoryTotal(categoria);
+                            }
+                        }
                         
                         // Mostrar info do cache se houver dados carregados
                         if (dados.salario || Object.values(dados).some(valor => valor && valor !== dados.timestamp)) {
