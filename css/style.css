@@ -122,12 +122,12 @@ footer a {
 }
 
 .reset-btn {
-    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    background: linear-gradient(135deg, #6c5ce7, #6c5ce7);
     color: white;
 }
 
 .print-btn {
-    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    background: linear-gradient(121deg, #4a5058, #4a5058);
     color: white;
 }
 
