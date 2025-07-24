@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo Financeiro Pessoal - Van</title>
+    <title>Controle Financeiro Pessoal</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="icon" href="img/favicon.png" type="image/x-icon">   
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>💸 Cálculo Financeiro Pessoal - Van</h1>
+            <h1>💰 Controle Financeiro Dinâmico</h1>
             <p>Configure seus gastos e veja os percentuais em tempo real</p>
         </div>
         
         <div class="content">
             <div class="cache-info" id="cache-info">
-                💾 Os dados salvos no cache do seu navedor! Não coletamos nenhuma informação.
+                💾 Dados salvos automaticamente! Seus valores ficam guardados até você limpar os campos.
             </div>
             
             <div class="input-section">
@@ -31,190 +31,191 @@
             </div>
             
             <div id="categories" class="fade-in" style="display: none;">
-                <div class="category-input moradia">
-                    <div class="category-title">
-                        <div class="category-icon" style="background: #45B7D1;">🏠</div>
-                        Moradia (25%)
-                    </div>
-                    <div class="category-explanation">
-                        Aluguel, financiamento, condomínio, contas de água, luz, gás, IPTU
-                    </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="moradia-valor">Valor gasto (R$):</label>
-                            <input type="number" id="moradia-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                <div class="categories-grid">
+                    <div class="category-input moradia">
+                        <div class="category-title">
+                            <div class="category-icon" style="background: #45B7D1;">🏠</div>
+                            Moradia (25%)
                         </div>
-                        <div class="percentage-display" id="moradia-percent">0%</div>
-                        <button class="expand-btn" onclick="toggleSubcategories('moradia')" title="Adicionar detalhes">+</button>
-                    </div>
-                    <div class="subcategories" id="moradia-subcategories">
-                        <div class="subcategory-total">Total: R$ 0,00</div>
-                        <button class="add-subcategory" onclick="addSubcategory('moradia')">+ Adicionar item</button>
-                    </div>
-                </div>
-                
-                <div class="category-input alimentacao">
-                    <div class="category-title">
-                        <div class="category-icon" style="background: #FF6B6B;">🍽️</div>
-                        Alimentação (10-15%)
-                    </div>
-                    <div class="category-explanation">
-                        Supermercado, feira, delivery e refeições fora de casa
-                    </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="alimentacao-valor">Valor gasto (R$):</label>
-                            <input type="number" id="alimentacao-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                        <div class="category-explanation">
+                            Aluguel, financiamento, condomínio, contas de água, luz, gás, IPTU
                         </div>
-                        <div class="percentage-display" id="alimentacao-percent">0%</div>
-                        <button class="expand-btn" onclick="toggleSubcategories('alimentacao')" title="Adicionar detalhes">+</button>
-                    </div>
-                    <div class="subcategories" id="alimentacao-subcategories">
-                        <div class="subcategory-total">Total: R$ 0,00</div>
-                        <button class="add-subcategory" onclick="addSubcategory('alimentacao')">+ Adicionar item</button>
-                    </div>
-                </div>
-                
-                <div class="category-input transporte">
-                    <div class="category-title">
-                        <div class="category-icon" style="background: #4ECDC4;">🚗</div>
-                        Transporte (10%)
-                    </div>
-                    <div class="category-explanation">
-                        Combustível, transporte público, manutenção, seguro, IPVA
-                    </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="transporte-valor">Valor gasto (R$):</label>
-                            <input type="number" id="transporte-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="moradia-valor">Valor total (R$):</label>
+                                <input type="number" id="moradia-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                            </div>
+                            <div class="percentage-display" id="moradia-percent">0%</div>
+                            <button class="expand-btn" onclick="toggleSubcategories('moradia')" title="Adicionar detalhes">+</button>
                         </div>
-                        <div class="percentage-display" id="transporte-percent">0%</div>
-                        <button class="expand-btn" onclick="toggleSubcategories('transporte')" title="Adicionar detalhes">+</button>
-                    </div>
-                    <div class="subcategories" id="transporte-subcategories">
-                        <div class="subcategory-total">Total: R$ 0,00</div>
-                        <button class="add-subcategory" onclick="addSubcategory('transporte')">+ Adicionar item</button>
-                    </div>
-                </div>
-                
-                <div class="category-input gastos-fixos">
-                    <div class="category-title">
-                        <div class="category-icon" style="background: #96CEB4;">📄</div>
-                        Gastos Fixos (5-10%)
-                    </div>
-                    <div class="category-explanation">
-                        Telefonia, internet, assinaturas, escola, plano de saúde, etc.
-                    </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="gastos-valor">Valor gasto (R$):</label>
-                            <input type="number" id="gastos-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                        <div class="subcategories" id="moradia-subcategories">
+                            <div class="subcategory-total">Total: R$ 0,00</div>
+                            <button class="add-subcategory" onclick="addSubcategory('moradia')">+ Adicionar item</button>
                         </div>
-                        <div class="percentage-display" id="gastos-percent">0%</div>
-                        <button class="expand-btn" onclick="toggleSubcategories('gastos')" title="Adicionar detalhes">+</button>
                     </div>
-                    <div class="subcategories" id="gastos-subcategories">
-                        <div class="subcategory-total">Total: R$ 0,00</div>
-                        <button class="add-subcategory" onclick="addSubcategory('gastos')">+ Adicionar item</button>
-                    </div>
-                </div>
-                
-                <div class="category-input investimentos">
-                    <div class="category-title">
-                        <div class="category-icon" style="background: #6C5CE7;">🎯</div>
-                        Investimentos (15%)
-                    </div>
-                    <div class="category-explanation">
-                        Bolsa, fundos, renda fixa, previdência privada, etc.
-                    </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="investimentos-valor">Valor investido (R$):</label>
-                            <input type="number" id="investimentos-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                    
+                    <div class="category-input alimentacao">
+                        <div class="category-title">
+                            <div class="category-icon" style="background: #FF6B6B;">🍽️</div>
+                            Alimentação (10-15%)
                         </div>
-                        <div class="percentage-display" id="investimentos-percent">0%</div>
-                        <button class="expand-btn" onclick="toggleSubcategories('investimentos')" title="Adicionar detalhes">+</button>
-                    </div>
-                    <div class="subcategories" id="investimentos-subcategories">
-                        <div class="subcategory-total">Total: R$ 0,00</div>
-                        <button class="add-subcategory" onclick="addSubcategory('investimentos')">+ Adicionar item</button>
-                    </div>
-                </div>
-                
-                <div class="category-input poupanca">
-                    <div class="category-title">
-                        <div class="category-icon" style="background: #A0522D;">💼</div>
-                        Poupança / Reserva (5-10%)
-                    </div>
-                    <div class="category-explanation">
-                        Fundo de emergência, viagens futuras, despesas inesperadas
-                    </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="poupanca-valor">Valor poupado (R$):</label>
-                            <input type="number" id="poupanca-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                        <div class="category-explanation">
+                            Supermercado, feira, delivery e refeições fora de casa
                         </div>
-                        <div class="percentage-display" id="poupanca-percent">0%</div>
-                        <button class="expand-btn" onclick="toggleSubcategories('poupanca')" title="Adicionar detalhes">+</button>
-                    </div>
-                    <div class="subcategories" id="poupanca-subcategories">
-                        <div class="subcategory-total">Total: R$ 0,00</div>
-                        <button class="add-subcategory" onclick="addSubcategory('poupanca')">+ Adicionar item</button>
-                    </div>
-                </div>
-                
-                <div class="category-input lazer">
-                    <div class="category-title">
-                        <div class="category-icon" style="background: #FECA57;">🛍️</div>
-                        Lazer / Pessoal (10%)
-                    </div>
-                    <div class="category-explanation">
-                        Viagens, cinema, hobbies, restaurantes, roupas, autocuidado
-                    </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="lazer-valor">Valor gasto (R$):</label>
-                            <input type="number" id="lazer-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="alimentacao-valor">Valor total (R$):</label>
+                                <input type="number" id="alimentacao-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                            </div>
+                            <div class="percentage-display" id="alimentacao-percent">0%</div>
+                            <button class="expand-btn" onclick="toggleSubcategories('alimentacao')" title="Adicionar detalhes">+</button>
                         </div>
-                        <div class="percentage-display" id="lazer-percent">0%</div>
-                        <button class="expand-btn" onclick="toggleSubcategories('lazer')" title="Adicionar detalhes">+</button>
-                    </div>
-                    <div class="subcategories" id="lazer-subcategories">
-                        <div class="subcategory-total">Total: R$ 0,00</div>
-                        <button class="add-subcategory" onclick="addSubcategory('lazer')">+ Adicionar item</button>
-                    </div>
-                </div>
-                
-                <div class="category-input doacoes">
-                    <div class="category-title">
-                        <div class="category-icon" style="background: #FF9500;">🎁</div>
-                        Doações (0-5% - Opcional)
-                    </div>
-                    <div class="category-explanation">
-                        Caridade, dízimos, ajuda familiar, etc.
-                    </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="doacoes-valor">Valor doado (R$):</label>
-                            <input type="number" id="doacoes-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                        <div class="subcategories" id="alimentacao-subcategories">
+                            <div class="subcategory-total">Total: R$ 0,00</div>
+                            <button class="add-subcategory" onclick="addSubcategory('alimentacao')">+ Adicionar item</button>
                         </div>
-                        <div class="percentage-display" id="doacoes-percent">0%</div>
-                        <button class="expand-btn" onclick="toggleSubcategories('doacoes')" title="Adicionar detalhes">+</button>
                     </div>
-                    <div class="subcategories" id="doacoes-subcategories">
-                        <div class="subcategory-total">Total: R$ 0,00</div>
-                        <button class="add-subcategory" onclick="addSubcategory('doacoes')">+ Adicionar item</button>
+                    
+                    <div class="category-input transporte">
+                        <div class="category-title">
+                            <div class="category-icon" style="background: #4ECDC4;">🚗</div>
+                            Transporte (10%)
+                        </div>
+                        <div class="category-explanation">
+                            Combustível, transporte público, manutenção, seguro, IPVA
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="transporte-valor">Valor total (R$):</label>
+                                <input type="number" id="transporte-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                            </div>
+                            <div class="percentage-display" id="transporte-percent">0%</div>
+                            <button class="expand-btn" onclick="toggleSubcategories('transporte')" title="Adicionar detalhes">+</button>
+                        </div>
+                        <div class="subcategories" id="transporte-subcategories">
+                            <div class="subcategory-total">Total: R$ 0,00</div>
+                            <button class="add-subcategory" onclick="addSubcategory('transporte')">+ Adicionar item</button>
+                        </div>
+                    </div>
+                    
+                    <div class="category-input gastos-fixos">
+                        <div class="category-title">
+                            <div class="category-icon" style="background: #96CEB4;">📄</div>
+                            Gastos Fixos (5-10%)
+                        </div>
+                        <div class="category-explanation">
+                            Telefonia, internet, assinaturas, escola, plano de saúde, etc.
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="gastos-valor">Valor total (R$):</label>
+                                <input type="number" id="gastos-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                            </div>
+                            <div class="percentage-display" id="gastos-percent">0%</div>
+                            <button class="expand-btn" onclick="toggleSubcategories('gastos')" title="Adicionar detalhes">+</button>
+                        </div>
+                        <div class="subcategories" id="gastos-subcategories">
+                            <div class="subcategory-total">Total: R$ 0,00</div>
+                            <button class="add-subcategory" onclick="addSubcategory('gastos')">+ Adicionar item</button>
+                        </div>
+                    </div>
+                    
+                    <div class="category-input investimentos">
+                        <div class="category-title">
+                            <div class="category-icon" style="background: #6C5CE7;">🎯</div>
+                            Investimentos (15%)
+                        </div>
+                        <div class="category-explanation">
+                            Bolsa, fundos, renda fixa, previdência privada, etc.
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="investimentos-valor">Valor total (R$):</label>
+                                <input type="number" id="investimentos-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                            </div>
+                            <div class="percentage-display" id="investimentos-percent">0%</div>
+                            <button class="expand-btn" onclick="toggleSubcategories('investimentos')" title="Adicionar detalhes">+</button>
+                        </div>
+                        <div class="subcategories" id="investimentos-subcategories">
+                            <div class="subcategory-total">Total: R$ 0,00</div>
+                            <button class="add-subcategory" onclick="addSubcategory('investimentos')">+ Adicionar item</button>
+                        </div>
+                    </div>
+                    
+                    <div class="category-input poupanca">
+                        <div class="category-title">
+                            <div class="category-icon" style="background: #A0522D;">💼</div>
+                            Poupança / Reserva (5-10%)
+                        </div>
+                        <div class="category-explanation">
+                            Fundo de emergência, viagens futuras, despesas inesperadas
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="poupanca-valor">Valor total (R$):</label>
+                                <input type="number" id="poupanca-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                            </div>
+                            <div class="percentage-display" id="poupanca-percent">0%</div>
+                            <button class="expand-btn" onclick="toggleSubcategories('poupanca')" title="Adicionar detalhes">+</button>
+                        </div>
+                        <div class="subcategories" id="poupanca-subcategories">
+                            <div class="subcategory-total">Total: R$ 0,00</div>
+                            <button class="add-subcategory" onclick="addSubcategory('poupanca')">+ Adicionar item</button>
+                        </div>
+                    </div>
+                    
+                    <div class="category-input lazer">
+                        <div class="category-title">
+                            <div class="category-icon" style="background: #FECA57;">🛍️</div>
+                            Lazer / Pessoal (10%)
+                        </div>
+                        <div class="category-explanation">
+                            Viagens, cinema, hobbies, restaurantes, roupas, autocuidado
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="lazer-valor">Valor total (R$):</label>
+                                <input type="number" id="lazer-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                            </div>
+                            <div class="percentage-display" id="lazer-percent">0%</div>
+                            <button class="expand-btn" onclick="toggleSubcategories('lazer')" title="Adicionar detalhes">+</button>
+                        </div>
+                        <div class="subcategories" id="lazer-subcategories">
+                            <div class="subcategory-total">Total: R$ 0,00</div>
+                            <button class="add-subcategory" onclick="addSubcategory('lazer')">+ Adicionar item</button>
+                        </div>
+                    </div>
+                    
+                    <div class="category-input doacoes">
+                        <div class="category-title">
+                            <div class="category-icon" style="background: #FF9500;">🎁</div>
+                            Doações (0-5% - Opcional)
+                        </div>
+                        <div class="category-explanation">
+                            Caridade, dízimos, ajuda familiar, etc.
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="doacoes-valor">Valor total (R$):</label>
+                                <input type="number" id="doacoes-valor" placeholder="R$ 0,00" min="0" step="0.01" readonly>
+                            </div>
+                            <div class="percentage-display" id="doacoes-percent">0%</div>
+                            <button class="expand-btn" onclick="toggleSubcategories('doacoes')" title="Adicionar detalhes">+</button>
+                        </div>
+                        <div class="subcategories" id="doacoes-subcategories">
+                            <div class="subcategory-total">Total: R$ 0,00</div>
+                            <button class="add-subcategory" onclick="addSubcategory('doacoes')">+ Adicionar item</button>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div id="results" class="results-section" style="display: none;">
                 <div class="credit-card-section">
-                    <div class="credit-card-title">💳 Limite (Máx) Sugerido do Cartão</div>
+                    <div class="credit-card-title">💳 Limite Sugerido do Cartão</div>
                     <div class="credit-limit" id="limite-cartao">R$ 0,00</div>
                     <div class="credit-breakdown">
-                        Baseado em Lazer + Gastos Fixos + Alimentação 
-                        <p>Uso máximo mensal do cartão de crédito!</p>
+                        Baseado em Lazer + Gastos Fixos + Alimentação
                     </div>
                 </div>
                 
