@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle Financeiro Pessoal!</title>
+    <title>Controle Financeiro Pessoal</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/favicon.png" type="image/x-icon">
 </head>
 <body>
     <div class="container">
@@ -15,7 +16,7 @@
         
         <div class="content">
             <div class="cache-info" id="cache-info">
-                💾 Os Dados salvos automaticamente em Cache no seu navegador! Não coletamos nenhuma informação.
+                💾 Os dados salvos no cache do seu navedor! Não coletamos nenhuma informação.
             </div>
             
             <div class="input-section">
@@ -293,6 +294,9 @@
         // Chave para salvar no localStorage
         const STORAGE_KEY = 'controle-financeiro-dados-v2';
         
+        // Flag para controlar se os dados já foram carregados
+        let dadosCarregados = false;
+        
         // Armazenar subcategorias
         let subcategorias = {
             moradia: [],
@@ -376,8 +380,21 @@
             calcularOrcamento();
         }
         
+        // Função para limpar subcategorias existentes
+        function limparSubcategorias(categoria) {
+            const subcategoriesDiv = document.getElementById(`${categoria}-subcategories`);
+            const items = subcategoriesDiv.querySelectorAll('.subcategory-item');
+            items.forEach(item => item.remove());
+            
+            // Resetar total
+            const totalDisplay = subcategoriesDiv.querySelector('.subcategory-total');
+            totalDisplay.textContent = 'Total: R$ 0,00';
+        }
+        
         // Função para salvar dados no localStorage
         function salvarDados() {
+            if (!dadosCarregados) return; // Não salvar durante o carregamento inicial
+            
             const dados = {
                 salario: salarioInput.value,
                 moradia: inputs.moradia.value,
@@ -417,6 +434,8 @@
         
         // Função para carregar dados do localStorage
         function carregarDados() {
+            if (dadosCarregados) return; // Evitar carregamento múltiplo
+            
             try {
                 const dadosSalvos = localStorage.getItem(STORAGE_KEY);
                 if (dadosSalvos) {
@@ -440,13 +459,20 @@
                         // Carregar subcategorias
                         if (dados.subcategorias) {
                             for (const categoria in dados.subcategorias) {
+                                // Limpar subcategorias existentes antes de carregar
+                                limparSubcategorias(categoria);
+                                
                                 const items = dados.subcategorias[categoria];
                                 items.forEach(item => {
-                                    addSubcategory(categoria);
-                                    const subcategoriesDiv = document.getElementById(`${categoria}-subcategories`);
-                                    const lastItem = subcategoriesDiv.querySelector('.subcategory-item:last-of-type');
-                                    lastItem.querySelector('.subcategory-name').value = item.name;
-                                    lastItem.querySelector('.subcategory-value').value = item.value;
+                                    if (item.name || item.value) { // Só adicionar se houver dados
+                                        addSubcategory(categoria);
+                                        const subcategoriesDiv = document.getElementById(`${categoria}-subcategories`);
+                                        const lastItem = subcategoriesDiv.querySelector('.subcategory-item:last-of-type');
+                                        if (lastItem) {
+                                            lastItem.querySelector('.subcategory-name').value = item.name || '';
+                                            lastItem.querySelector('.subcategory-value').value = item.value || '';
+                                        }
+                                    }
                                 });
                                 updateCategoryTotal(categoria);
                             }
@@ -457,12 +483,19 @@
                             cacheInfoDiv.style.display = 'block';
                         }
                         
+                        // Marcar que os dados foram carregados
+                        dadosCarregados = true;
+                        
                         // Recalcular após carregar
                         calcularOrcamento();
                     }
+                } else {
+                    // Marcar como carregado mesmo sem dados salvos
+                    dadosCarregados = true;
                 }
             } catch (error) {
                 console.error('Erro ao carregar dados do cache:', error);
+                dadosCarregados = true; // Marcar como carregado para evitar loops
             }
         }
         
@@ -494,17 +527,21 @@
                     // Aplicar cores baseadas nas faixas ideais
                     const faixa = faixasIdeais[categoria];
                     if (percentual > faixa.max) {
-                        percentDisplays[categoria].style.backgroundColor = '#fee';
-                        percentDisplays[categoria].style.color = '#e74c3c';
+                        percentDisplays[categoria].style.backgroundColor = '#721c24';
+                        percentDisplays[categoria].style.color = '#f5c6cb';
+                        percentDisplays[categoria].style.borderColor = '#dc3545';
                     } else if (percentual < faixa.min && percentual > 0) {
-                        percentDisplays[categoria].style.backgroundColor = '#fff3cd';
-                        percentDisplays[categoria].style.color = '#f39c12';
+                        percentDisplays[categoria].style.backgroundColor = '#664d03';
+                        percentDisplays[categoria].style.color = '#ffecb5';
+                        percentDisplays[categoria].style.borderColor = '#ffc107';
                     } else if (percentual >= faixa.min && percentual <= faixa.max) {
-                        percentDisplays[categoria].style.backgroundColor = '#f0f9f0';
-                        percentDisplays[categoria].style.color = '#4CAF50';
+                        percentDisplays[categoria].style.backgroundColor = '#0f5132';
+                        percentDisplays[categoria].style.color = '#d1e7dd';
+                        percentDisplays[categoria].style.borderColor = '#28a745';
                     } else {
-                        percentDisplays[categoria].style.backgroundColor = '#f8f9fa';
-                        percentDisplays[categoria].style.color = '#6c757d';
+                        percentDisplays[categoria].style.backgroundColor = '#2c2f36';
+                        percentDisplays[categoria].style.color = '#ffffff';
+                        percentDisplays[categoria].style.borderColor = '#5a6268';
                     }
                     
                     totalGastoValor += valor;
@@ -542,8 +579,10 @@
                 resultsDiv.style.display = 'none';
             }
             
-            // Salvar dados após cada cálculo
-            salvarDados();
+            // Salvar dados após cada cálculo (só se já carregou)
+            if (dadosCarregados) {
+                salvarDados();
+            }
         }
         
         function limparCampos() {
@@ -554,8 +593,19 @@
                 for (const categoria in inputs) {
                     inputs[categoria].value = '';
                     percentDisplays[categoria].textContent = '0%';
-                    percentDisplays[categoria].style.backgroundColor = '#f8f9fa';
-                    percentDisplays[categoria].style.color = '#6c757d';
+                    percentDisplays[categoria].style.backgroundColor = '#2c2f36';
+                    percentDisplays[categoria].style.color = '#ffffff';
+                    percentDisplays[categoria].style.borderColor = '#5a6268';
+                    
+                    // Limpar subcategorias
+                    limparSubcategorias(categoria);
+                    
+                    // Fechar subcategoria se estiver aberta
+                    const subcategoriesDiv = document.getElementById(`${categoria}-subcategories`);
+                    const expandBtn = subcategoriesDiv.previousElementSibling.querySelector('.expand-btn');
+                    subcategoriesDiv.classList.remove('expanded');
+                    expandBtn.classList.remove('expanded');
+                    expandBtn.textContent = '+';
                 }
                 
                 // Limpar do localStorage
@@ -654,17 +704,17 @@
         // Event listeners para cálculo e salvamento em tempo real
         salarioInput.addEventListener('input', calcularOrcamento);
         
-        for (const categoria in inputs) {
-            inputs[categoria].addEventListener('input', calcularOrcamento);
-        }
-        
         // Carregar dados salvos ao inicializar a página
         document.addEventListener('DOMContentLoaded', function() {
             carregarDados();
         });
         
-        // Carregar dados salvos imediatamente (caso o DOMContentLoaded já tenha disparado)
-        carregarDados();
+        // Carregar dados apenas uma vez quando a página carrega
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', carregarDados);
+        } else {
+            carregarDados();
+        }
     </script>
 </body>
 </html>
